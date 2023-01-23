@@ -1,0 +1,99 @@
+@import "./fonts/inter/fonts.scss";
+
+@mixin flexRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+body {
+  background: #f2f2f2;
+}
+
+#root {
+  max-width: 1440px;
+  height: 100%;
+  margin: 0 auto;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.App {
+  margin-top: 80px;
+  border: 1px solid green;
+  //width: 100%;
+}
+
+.header {
+  // border: 1px solid yellow;
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  left: 0px;
+  top: 0px;
+  background-image: url("./assets/header-net.svg"),
+    linear-gradient(180deg, #bb1e1e 71.29%, #b21919 99.95%);
+  background-repeat: no-repeat;
+  background-position: 80%;
+
+  .container {
+    max-width: 1440px;
+    height: 100%;
+    margin: auto;
+    @include flexRow;
+    color: #fff;
+
+    .makeHomepage {
+      font-size: 16px;
+      line-height: 21px;
+      letter-spacing: -0.136px;
+      font-family: Inter-SemiBold;
+      margin-right: 46px;
+    }
+
+    .discover {
+      font-size: 14px;
+      line-height: 21px;
+      letter-spacing: -0.119px;
+      font-family: Inter-Regular;
+      margin-right: auto;
+    }
+
+    .rightSection {
+      @include flexRow;
+      margin-right: 60px;
+
+      .getButton {
+        @include button;
+        width: 69px;
+        height: 40px;
+        background: #ffffff;
+        font-family: Inter-Bold;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        color: #1d1d1b;
+      }
+
+      .noThanks {
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        font-family: Inter-Bold;
+        margin-left: 24px;
+      }
+    }
+  }
+}
