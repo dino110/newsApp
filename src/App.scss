@@ -24,17 +24,15 @@ body {
   max-width: 1440px;
   height: 100%;
   margin: 0 auto;
-  border: 1px solid black;
+  // border: 1px solid black;
   text-align: center;
 }
 
 .App {
-  margin-top: 80px;
-  border: 1px solid green;
-  //width: 100%;
+  margin-top: 60px;
 }
 
-.header {
+.Header {
   // border: 1px solid yellow;
   position: absolute;
   width: 100%;
@@ -46,14 +44,14 @@ body {
   background-repeat: no-repeat;
   background-position: 80%;
 
-  .container {
+  .Container {
     max-width: 1440px;
     height: 100%;
     margin: auto;
     @include flexRow;
     color: #fff;
 
-    .makeHomepage {
+    .MakeHomepage {
       font-size: 16px;
       line-height: 21px;
       letter-spacing: -0.136px;
@@ -61,7 +59,7 @@ body {
       margin-right: 46px;
     }
 
-    .discover {
+    .Discover {
       font-size: 14px;
       line-height: 21px;
       letter-spacing: -0.119px;
@@ -69,11 +67,11 @@ body {
       margin-right: auto;
     }
 
-    .rightSection {
+    .RightSection {
       @include flexRow;
       margin-right: 60px;
 
-      .getButton {
+      .GetButton {
         @include button;
         width: 69px;
         height: 40px;
@@ -87,13 +85,85 @@ body {
         color: #1d1d1b;
       }
 
-      .noThanks {
+      .NoThanks {
         font-size: 14px;
         line-height: 20px;
         text-align: center;
         font-family: Inter-Bold;
         margin-left: 24px;
       }
+    }
+  }
+}
+
+.SearchComponent {
+  width: 100%;
+  padding-top: 35px;
+  @include flexRow;
+  justify-content: start;
+
+  //left: 0;
+
+  .MyNews {
+    font-family: Inter-Black;
+    font-size: 32px;
+    line-height: 39px;
+
+    section {
+      color: #1d1d1b;
+      display: inline;
+    }
+
+    .RedT {
+      color: #bb1e1e;
+    }
+  }
+
+  .SearchInput {
+    width: 725px;
+    margin-left: 43px;
+    @include flexRow;
+
+    input {
+      width: 100%;
+      height: 50px;
+      background: #ffffff;
+      box-shadow: 0px 1px 2px -1px #c8cad1;
+      border-radius: 10px;
+      border: none;
+      text-indent: 50px;
+      font-size: 15px;
+      line-height: 20px;
+      color: #1d1d1b;
+      mix-blend-mode: normal;
+      // opacity: 0.4;
+      font-family: Inter-Regular;
+
+      &:focus {
+        outline: none;
+        //border: ""
+      }
+    }
+
+    .searchIcon {
+      position: relative;
+      left: 35px;
+    }
+
+    .SearchButton {
+      @include button;
+      background: #bb1e1e;
+      border-radius: 6px;
+      width: 95px;
+      height: 40px;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 15px;
+      line-height: 20px;
+      color: #ffffff;
+      font-family: Inter-Bold;
+      position: relative;
+      left: -90px;
     }
   }
 }

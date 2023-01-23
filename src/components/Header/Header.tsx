@@ -1,14 +1,14 @@
 function Header() {
   return (
-    <div className="header">
-      <div className="container">
-        <div className="makeHomepage">Make MyNews your homepage</div>
-        <div className="discover">
+    <div className="Header">
+      <div className="Container">
+        <div className="MakeHomepage">Make MyNews your homepage</div>
+        <div className="Discover">
           Every day discover what’s trending on the internet!
         </div>
-        <div className="rightSection">
-          <button className="getButton">GET</button>
-          <div className="noThanks">No, thanks</div>
+        <div className="RightSection">
+          <button className="GetButton">GET</button>
+          <div className="NoThanks">No, thanks</div>
         </div>
       </div>
     </div>
