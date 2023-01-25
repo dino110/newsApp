@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header/Header";
 import SearchComponent from "./components/SearchComponent/SearchComponent";
+import SideMenu from "./components/SideMenu/SideMenu";
 import "./App.scss";
 
 function App() {
@@ -8,6 +9,8 @@ function App() {
     <div className="App">
       <Header />
       <SearchComponent />
+      <SideMenu />
+
       <div></div>
       <h1>Vite + React</h1>
 
