@@ -1,10 +1,4 @@
-const newsApiKey = "dd468e24f9e047a4b73f010ac674cfca";
-import { useEffect } from "react";
-
 function Header() {
-  const getNews = async () => {};
-  useEffect(() => {});
-
   return (
     <div className="Header">
       <div className="Container">

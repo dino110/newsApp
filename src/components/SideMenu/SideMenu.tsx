@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import home from "../../assets/SideMenuIcons/Home.svg?inline";
 import sports from "../../assets/SideMenuIcons/Sports.svg?inline";
 import business from "../../assets/SideMenuIcons/Business.svg?inline";
@@ -13,50 +12,61 @@ type menuCategory = { displayName: string; searchName: string; icon: string };
 const categories: menuCategory[] = [
   {
     displayName: "Home",
-    searchName: "Home",
+    searchName: "home",
     icon: home,
   },
   {
     displayName: "General",
-    searchName: "General",
+    searchName: "general",
     icon: general,
   },
   {
     displayName: "Business",
-    searchName: "Business",
+    searchName: "business",
     icon: business,
   },
   {
-    displayName: "Healt",
-    searchName: "Healt",
+    displayName: "Health",
+    searchName: "health",
     icon: health,
   },
   {
     displayName: "Science",
-    searchName: "Science",
+    searchName: "science",
     icon: science,
   },
   {
     displayName: "Sports",
-    searchName: "Sports",
+    searchName: "sports",
     icon: sports,
   },
   {
     displayName: "Technology",
-    searchName: "Technology",
+    searchName: "technology",
     icon: technology,
   },
 ];
 
-function SideMenu() {
+function SideMenu(props: {
+  setCategoryState(index: number): void;
+  categorySignal: any;
+}) {
   const [active, setActive] = useState(0);
+
   return (
     <div className="SideMenu">
       {categories.map((category, index) => (
         <div
           className={`CategoryBox ${active == index ? "active" : ""}`}
           key={index}
-          onClick={() => setActive(index)}
+          onClick={() => {
+            setActive(index);
+            //props.setCategoryState(category.displayName);
+            props.setCategoryState(index);
+            props.categorySignal.value = category.searchName;
+
+            // console.log(props.categorySignal.value);
+          }}
         >
           <img
             src={category.icon}
