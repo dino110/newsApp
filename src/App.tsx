@@ -35,10 +35,9 @@ function App() {
       <Header />
       <SearchComponent />
       <hr className="HorizontalLine"></hr>
-      {categorySignal.value}
       <div className="MainContent">
         <SideMenu categorySignal={categorySignal} />
-        <NewsSection categorySignal={categorySignal} />
+        <NewsSection />
       </div>
     </div>
   );

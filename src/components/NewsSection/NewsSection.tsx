@@ -1,10 +1,10 @@
 import NewsCard from "./NewsCard/NewsCard";
 import LatestNewsCard from "./LatestNewsCard/LatestNewsCard";
 
-function NewsSection(props: { categorySignal: any }) {
+function NewsSection() {
   return (
     <div className="NewsSection">
-      <div className="Title">News {props.categorySignal.value}</div>
+      <div className="Title">News</div>
       <div className="NewsContainer">
         <LatestNewsCard />
         <NewsCard
