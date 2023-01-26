@@ -8,16 +8,12 @@ import { ResponseAPI } from "./api/api";
 import { getCategoryNews, getGeneralNews } from "./utils/getNews";
 import "./App.scss";
 
-import { signal } from "@preact/signals";
+import { signal } from "@preact/signals-react";
 
 const categorySignal = signal("home");
 const allNews = signal<ResponseAPI[]>([]);
 
 function App() {
-  const [category, setCategory] = useState(2);
-  const [proba, setProba] = useState(0);
-  const [news, setNews] = useState<ResponseAPI[]>([]);
-
   useEffect(() => {
     console.log("from App:", categorySignal.value);
     if (categorySignal.value == "home") {
@@ -41,10 +37,7 @@ function App() {
       <hr className="HorizontalLine"></hr>
       {categorySignal.value}
       <div className="MainContent">
-        <SideMenu
-          setCategoryState={setCategory}
-          categorySignal={categorySignal}
-        />
+        <SideMenu categorySignal={categorySignal} />
         <NewsSection categorySignal={categorySignal} />
       </div>
     </div>
