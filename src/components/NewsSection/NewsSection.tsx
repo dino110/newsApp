@@ -1,19 +1,25 @@
 import NewsCard from "./NewsCard/NewsCard";
 import LatestNewsCard from "./LatestNewsCard/LatestNewsCard";
 
-function NewsSection() {
+import { ResponseAPI } from "../../api/api";
+
+/*{allNews.value.map((news, index) => (  ))}*/
+
+function NewsSection({ allNews }: { allNews: { value: ResponseAPI[] } }) {
   return (
     <div className="NewsSection">
       <div className="Title">News</div>
       <div className="NewsContainer">
         <LatestNewsCard />
+
         <NewsCard
           order={1}
-          category="tech"
+          category="sports"
           newsAuthor="Caroline Parsons"
           newsTitle="1"
           imgUrl="https://sportshub.cbsistatic.com/i/r/2023/01/25/02feadf9-e536-4511-9db5-c971cb086063/thumbnail/1200x675/58f27bf4b4e8ef11d3d8fd60d796e612/beltran-getty-1.png"
         />
+
         <NewsCard
           order={2}
           category="tech"

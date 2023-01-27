@@ -14,20 +14,20 @@ const categorySignal = signal("home");
 const allNews = signal<ResponseAPI[]>([]);
 
 function App() {
+  //const [news, setNews] = useState<ResponseAPI[]>([]);
+
   useEffect(() => {
-    console.log("from App:", categorySignal.value);
     if (categorySignal.value == "home") {
       getGeneralNews().then((data) => {
         allNews.value = data;
-        console.log(data);
+        console.log("data:", data);
       });
     } else {
       getCategoryNews(categorySignal.value).then((data) => {
         allNews.value = data;
-        console.log(data);
+        console.log("data:", data);
       });
     }
-    //  finish loading
   }, [categorySignal.value]);
 
   return (
@@ -37,7 +37,7 @@ function App() {
       <hr className="HorizontalLine"></hr>
       <div className="MainContent">
         <SideMenu categorySignal={categorySignal} />
-        <NewsSection />
+        <NewsSection allNews={allNews} />
       </div>
     </div>
   );

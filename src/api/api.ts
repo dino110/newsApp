@@ -6,6 +6,7 @@ export const client = axios.create({
 
 export interface ResponseAPI {
   status: string;
+  sources: {}[];
   totalResults: number;
-  articles: [];
+  articles: {}[];
 }
