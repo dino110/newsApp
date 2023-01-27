@@ -1,4 +1,3 @@
-import { useState } from "react";
 import home from "../../assets/SideMenuIcons/Home.svg?inline";
 import sports from "../../assets/SideMenuIcons/Sports.svg?inline";
 import business from "../../assets/SideMenuIcons/Business.svg?inline";
