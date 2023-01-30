@@ -40,14 +40,12 @@ function NewsSection() {
     setNews(help);
     allNews.value = help;
     console.log("done");
-    // setNewsFun();
   }, []);
 
   useEffect(() => {
     console.log("useEffect");
     allNews.value = news;
     console.log("__news:", news);
-    // setNewsFun();
   }, [news, setNews]);
 
   const getAllArticles = () => {
