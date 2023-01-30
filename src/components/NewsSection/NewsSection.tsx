@@ -31,7 +31,6 @@ const allNews = signal<Article[]>([]); //<allArticles>
 
 function NewsSection() {
   const [news, setNews] = useState<Article[]>([]);
-  const [news2, setNews2] = useState<Article[]>([]);
 
   useEffect(() => {
     console.log("starting...");
@@ -62,18 +61,12 @@ function NewsSection() {
     return newsArr;
   };
 
-  const setNewsFun = () => {
-    setNews2(news);
-    console.log("News set");
-  };
-
   return (
     <div className="NewsSection">
       <div className="Title">News</div>
-      <button onClick={setNewsFun}>Set News</button>
       <div className="NewsContainer">
         <LatestNewsCard />
-        {news2.map((news, index) => (
+        {news.map((news, index) => (
           <NewsCard
             key={index}
             order={index}
