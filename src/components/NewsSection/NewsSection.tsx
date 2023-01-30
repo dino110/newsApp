@@ -22,7 +22,7 @@ interface Article {
   title: string;
   description: string;
   url: string;
-  ulrToImage: string;
+  urlToImage: string;
   publishedAt: string;
   content: string;
   category?: string;
@@ -30,34 +30,26 @@ interface Article {
 const allNews = signal<Article[]>([]); //<allArticles>
 
 function NewsSection() {
-  const [news, setNews] = useState<Article[]>([]);
+  const news = allNews.value;
 
   useEffect(() => {
-    console.log("starting...");
     let help = getAllArticles();
-    console.log("help:", help);
-    setNews(help);
-    allNews.value = help;
-    console.log("done");
+    help.then((help) => {
+      allNews.value = help;
+    });
   }, []);
 
-  useEffect(() => {
-    console.log("useEffect");
-    allNews.value = news;
-    console.log("__news:", news);
-  }, [news, setNews]);
+  useEffect(() => {}, []);
 
-  const getAllArticles = () => {
+  const getAllArticles = async () => {
     let newsArr: Article[] = [];
-    let newArt: Article;
-    allCategories.forEach((category) => {
-      getCategoryNews(category).then((data) => {
-        data.articles.forEach((article) => {
-          newArt = { category: category, ...article };
-          newsArr.push(newArt);
-        });
-      });
-    });
+    for (const category of allCategories) {
+      const news = await getCategoryNews(category);
+      for (const article of news.articles) {
+        let newArticle = { category: category, ...article };
+        newsArr = [...newsArr, newArticle];
+      }
+    }
     return newsArr;
   };
 
@@ -73,7 +65,7 @@ function NewsSection() {
             category={news.category || ""}
             newsAuthor={news.author || "unknown"}
             newsTitle={news.description}
-            imgUrl={news.ulrToImage} // //"https://image.cnbcfm.com/api/v1/image/107185642-1675061950003-gettyimages-1192715579-AFP_1NK8BB.jpeg?v=1675062646&w=1920&h=1080"
+            imgUrl={news.urlToImage} // //"https://image.cnbcfm.com/api/v1/image/107185642-1675061950003-gettyimages-1192715579-AFP_1NK8BB.jpeg?v=1675062646&w=1920&h=1080"
           />
         ))}
 

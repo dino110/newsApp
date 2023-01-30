@@ -26,7 +26,7 @@ export interface CategoryResponseAPI {
     title: string;
     description: string;
     url: string;
-    ulrToImage: string;
+    urlToImage: string;
     publishedAt: string;
     content: string;
     category?: string;
