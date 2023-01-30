@@ -1,26 +1,28 @@
 import NewsCard from "./NewsCard/NewsCard";
 import LatestNewsCard from "./LatestNewsCard/LatestNewsCard";
 
-import { ResponseAPI } from "../../api/api";
+import { GeneralResponseAPI, CategoryResponseAPI } from "../../api/api";
 
 /*{allNews.value.map((news, index) => (  ))}*/
 
-function NewsSection({ allNews }: { allNews: { value: ResponseAPI[] } }) {
+function NewsSection({ allNews }: { allNews: any[any] }) {
+  //{ allNews: { value: CategoryResponseAPI } }
   return (
     <div className="NewsSection">
       <div className="Title">News</div>
       <div className="NewsContainer">
         <LatestNewsCard />
-
-        <NewsCard
-          order={1}
-          category="sports"
-          newsAuthor="Caroline Parsons"
-          newsTitle="1"
-          imgUrl="https://sportshub.cbsistatic.com/i/r/2023/01/25/02feadf9-e536-4511-9db5-c971cb086063/thumbnail/1200x675/58f27bf4b4e8ef11d3d8fd60d796e612/beltran-getty-1.png"
-        />
-
-        <NewsCard
+        {allNews.value.articles.map((news, index) => (
+          <NewsCard
+            key={index}
+            order={index}
+            category={news.category || ""}
+            newsAuthor={news.author || "unknown"}
+            newsTitle={news.description}
+            imgUrl="https://sportshub.cbsistatic.com/i/r/2023/01/25/02feadf9-e536-4511-9db5-c971cb086063/thumbnail/1200x675/58f27bf4b4e8ef11d3d8fd60d796e612/beltran-getty-1.png"
+          />
+        ))}
+        {/*      <NewsCard
           order={2}
           category="tech"
           newsAuthor="Caroline Parsons"
@@ -70,7 +72,7 @@ function NewsSection({ allNews }: { allNews: { value: ResponseAPI[] } }) {
           newsAuthor="Caroline Parsons"
           newsTitle="8"
           imgUrl="https://sportshub.cbsistatic.com/i/r/2023/01/25/02feadf9-e536-4511-9db5-c971cb086063/thumbnail/1200x675/58f27bf4b4e8ef11d3d8fd60d796e612/beltran-getty-1.png"
-        />
+        /> */}
       </div>
     </div>
   );
