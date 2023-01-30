@@ -4,9 +4,31 @@ export const client = axios.create({
   baseURL: `https://newsapi.org/v2`,
 });
 
-export interface ResponseAPI {
+export interface GeneralResponseAPI {
   status: string;
-  sources: {}[];
+  sources: {
+    id: string;
+    name: string;
+    description: string;
+    url: string;
+    category: string;
+    language: string;
+    country: string;
+  }[];
+}
+
+export interface CategoryResponseAPI {
+  status: string;
   totalResults: number;
-  articles: {}[];
+  articles: {
+    source: { id: string; name: string };
+    author: string;
+    title: string;
+    description: string;
+    url: string;
+    ulrToImage: string;
+    publishedAt: string;
+    content: string;
+    category?: string;
+  }[];
 }
