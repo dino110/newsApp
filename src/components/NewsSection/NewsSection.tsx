@@ -1,8 +1,7 @@
 import NewsCard from "./NewsCard/NewsCard";
 import LatestNewsCard from "./LatestNewsCard/LatestNewsCard";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-import { GeneralResponseAPI, CategoryResponseAPI } from "../../api/api";
 import { getCategoryNews } from "../../utils/getNews";
 import { signal } from "@preact/signals-react";
 
@@ -27,19 +26,19 @@ interface Article {
   content: string;
   category?: string;
 }
-const allNews = signal<Article[]>([]); //<allArticles>
+const allNews = signal<Article[]>([]);
 
-function NewsSection() {
-  const news = allNews.value;
-
+function NewsSection({ searchInput }: { searchInput: { value: string } }) {
   useEffect(() => {
-    let help = getAllArticles();
-    help.then((help) => {
-      allNews.value = help;
+    let allArticles = getAllArticles();
+    allArticles.then((allArticles) => {
+      allNews.value = allArticles.sort(function (a: Article, b: Article) {
+        return (
+          new Date(b.publishedAt).valueOf() - new Date(a.publishedAt).valueOf()
+        );
+      });
     });
   }, []);
-
-  useEffect(() => {}, []);
 
   const getAllArticles = async () => {
     let newsArr: Article[] = [];
@@ -58,16 +57,22 @@ function NewsSection() {
       <div className="Title">News</div>
       <div className="NewsContainer">
         <LatestNewsCard />
-        {news.map((news, index) => (
-          <NewsCard
-            key={index}
-            order={index}
-            category={news.category || ""}
-            newsAuthor={news.author || "unknown"}
-            newsTitle={news.description}
-            imgUrl={news.urlToImage} // //"https://image.cnbcfm.com/api/v1/image/107185642-1675061950003-gettyimages-1192715579-AFP_1NK8BB.jpeg?v=1675062646&w=1920&h=1080"
-          />
-        ))}
+        {allNews.value
+          .filter((news) => {
+            if (searchInput.value != "") {
+              return news.title.toLowerCase().includes(searchInput.value);
+            } else return news;
+          })
+          .map((news, index) => (
+            <NewsCard
+              key={index}
+              order={index}
+              category={news.category || ""}
+              newsAuthor={news.author || "unknown"}
+              newsTitle={news.title}
+              imgUrl={news.urlToImage} // //"https://image.cnbcfm.com/api/v1/image/107185642-1675061950003-gettyimages-1192715579-AFP_1NK8BB.jpeg?v=1675062646&w=1920&h=1080"
+            />
+          ))}
 
         {/*      <NewsCard
           order={2}
