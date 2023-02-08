@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useRef } from "react";
 import searchIcon from "../../assets/Search.svg";
 
-function SearchComponent() {
-  const [searchInput, setSearchInput] = useState("");
+function SearchComponent({ searchInput }: { searchInput: { value: string } }) {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const searchNews = (input: string) => {
-    console.log(input);
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (inputRef.current !== null) {
+      searchInput.value = inputRef.current.value;
+    }
   };
 
   return (
@@ -14,23 +17,22 @@ function SearchComponent() {
         <section className="RedT">My</section>
         <section>News</section>
       </div>
-      <div className="SearchInput">
+      <form className="SearchInput" onSubmit={handleSubmit}>
         <img src={searchIcon} className="searchIcon" />
         <input
+          ref={inputRef}
           placeholder="Search news"
           type="text"
-          onChange={(e) => {
-            setSearchInput(e.target.value);
-          }}
+          autoComplete="off"
+          // value={searchInput}
+          /* onChange={(e) => {
+            searchInput.value = e.target.value;
+          }}*/
         ></input>
-
-        <button
-          className="SearchButton"
-          onClick={() => searchNews(searchInput)}
-        >
+        <button className="SearchButton" type="submit">
           SEARCH
         </button>
-      </div>
+      </form>
     </div>
   );
 }
