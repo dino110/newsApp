@@ -2,6 +2,8 @@ import NewsCard from "./NewsCard/NewsCard";
 import LatestNewsCard from "./LatestNewsCard/LatestNewsCard";
 import { useEffect } from "react";
 
+import imageNotAvailable from "../../assets/image_not_available.webp?inline";
+
 import { getCategoryNews } from "../../utils/getNews";
 import { signal } from "@preact/signals-react";
 
@@ -67,10 +69,11 @@ function NewsSection({ searchInput }: { searchInput: { value: string } }) {
             <NewsCard
               key={index}
               order={index}
+              url={news.url}
               category={news.category || ""}
               newsAuthor={news.author || "unknown"}
               newsTitle={news.title}
-              imgUrl={news.urlToImage} // //"https://image.cnbcfm.com/api/v1/image/107185642-1675061950003-gettyimages-1192715579-AFP_1NK8BB.jpeg?v=1675062646&w=1920&h=1080"
+              imgUrl={news.urlToImage || imageNotAvailable}
             />
           ))}
 
