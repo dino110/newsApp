@@ -7,7 +7,7 @@ function SearchComponent({ searchInput }: { searchInput: { value: string } }) {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (inputRef.current !== null) {
-      searchInput.value = inputRef.current.value;
+      searchInput.value = inputRef.current.value.toLowerCase();
     }
   };
 
