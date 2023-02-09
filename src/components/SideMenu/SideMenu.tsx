@@ -11,7 +11,7 @@ type menuCategory = { displayName: string; searchName: string; icon: string };
 const categories: menuCategory[] = [
   {
     displayName: "Home",
-    searchName: "home",
+    searchName: "",
     icon: home,
   },
   {
