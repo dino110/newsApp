@@ -10,11 +10,11 @@ import { signal } from "@preact/signals-react";
 const allCategories = [
   "business",
   "entertainment",
-  //"general",
-  // "health",
-  // "science",
-  // "sports",
-  // "technology",
+  "general",
+  "health",
+  "science",
+  "sports",
+  "technology",
 ];
 
 interface Article {
@@ -30,7 +30,13 @@ interface Article {
 }
 const allNews = signal<Article[]>([]);
 
-function NewsSection({ searchInput }: { searchInput: { value: string } }) {
+function NewsSection({
+  searchInput,
+  categorySignal,
+}: {
+  searchInput: { value: string };
+  categorySignal: { value: string };
+}) {
   useEffect(() => {
     let allArticles = getAllArticles();
     allArticles.then((allArticles) => {
@@ -61,9 +67,18 @@ function NewsSection({ searchInput }: { searchInput: { value: string } }) {
         <LatestNewsCard />
         {allNews.value
           .filter((news) => {
-            if (searchInput.value != "") {
-              return news.title.toLowerCase().includes(searchInput.value);
+            if (categorySignal.value != "") {
+              return news.category
+                ?.toLowerCase()
+                .includes(categorySignal.value);
             } else return news;
+          })
+          .filter((categoryNews) => {
+            if (searchInput.value != "") {
+              return categoryNews.title
+                .toLowerCase()
+                .includes(searchInput.value);
+            } else return categoryNews;
           })
           .map((news, index) => (
             <NewsCard
@@ -71,7 +86,7 @@ function NewsSection({ searchInput }: { searchInput: { value: string } }) {
               order={index}
               url={news.url}
               category={news.category || ""}
-              newsAuthor={news.author || "unknown"}
+              newsAuthor={news.author || "unknown author"}
               newsTitle={news.title}
               imgUrl={news.urlToImage || imageNotAvailable}
             />

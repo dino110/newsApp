@@ -7,7 +7,7 @@ import "./App.scss";
 
 import { signal } from "@preact/signals-react";
 
-const categorySignal = signal("home");
+const categorySignal = signal("");
 const searchInput = signal("");
 
 function App() {
@@ -18,7 +18,10 @@ function App() {
       <hr className="HorizontalLine"></hr>
       <div className="MainContent">
         <SideMenu categorySignal={categorySignal} />
-        <NewsSection searchInput={searchInput} />
+        <NewsSection
+          searchInput={searchInput}
+          categorySignal={categorySignal}
+        />
       </div>
     </div>
   );
