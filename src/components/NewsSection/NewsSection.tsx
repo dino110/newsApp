@@ -17,7 +17,7 @@ const allCategories = [
   "technology",
 ];
 
-interface Article {
+export interface Article {
   source: { id: string; name: string };
   author: string;
   title: string;
@@ -37,17 +37,6 @@ function NewsSection({
   searchInput: { value: string };
   categorySignal: { value: string };
 }) {
-  useEffect(() => {
-    let allArticles = getAllArticles();
-    allArticles.then((allArticles) => {
-      allNews.value = allArticles.sort(function (a: Article, b: Article) {
-        return (
-          new Date(b.publishedAt).valueOf() - new Date(a.publishedAt).valueOf()
-        );
-      });
-    });
-  }, []);
-
   const getAllArticles = async () => {
     let newsArr: Article[] = [];
     for (const category of allCategories) {
@@ -60,11 +49,22 @@ function NewsSection({
     return newsArr;
   };
 
+  useEffect(() => {
+    let allArticles = getAllArticles();
+    allArticles.then((allArticles) => {
+      allNews.value = allArticles.sort(function (a: Article, b: Article) {
+        return (
+          new Date(b.publishedAt).valueOf() - new Date(a.publishedAt).valueOf()
+        );
+      });
+    });
+  }, []);
+
   return (
     <div className="NewsSection">
       <div className="Title">News</div>
       <div className="NewsContainer">
-        <LatestNewsCard />
+        <LatestNewsCard allNews={allNews} />
         {allNews.value
           .filter((news) => {
             if (categorySignal.value != "") {
