@@ -79,32 +79,4 @@ function SideMenu({ categorySignal }: { categorySignal: { value: string } }) {
   );
 }
 
-/*
-function SideMenu(props: { categorySignal: any }) {
-  const [active, setActive] = useState(0);
-
-  return (
-    <div className="SideMenu">
-      {categories.map((category, index) => (
-        <div
-          className={`CategoryBox ${active == index ? "active" : ""}`}
-          key={index}
-          onClick={() => {
-            setActive(index);
-            props.categorySignal.value = category.searchName;
-          }}
-        >
-          <img
-            src={category.icon}
-            className={`Icon ${active == index ? "active" : ""}`}
-          />
-          <div className={`CategoryName ${active == index ? "active" : ""}`}>
-            {category.displayName}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-*/
 export default SideMenu;
