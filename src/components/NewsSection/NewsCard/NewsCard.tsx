@@ -8,25 +8,29 @@ function NewsCard(props: {
   imgUrl: string;
   order: number;
   url: string;
-  favouriteArticles: { value: string[] };
 }) {
   const fill = useSignal("none");
 
   const toggleFavourite = () => {
-    let index = props.favouriteArticles.value.indexOf(props.url);
+    let favourites = localStorage.favourites
+      ? JSON.parse(localStorage.favourites)
+      : [];
+    let index = favourites.indexOf(props.url);
     if (index !== -1) {
-      props.favouriteArticles.value.splice(index, 1);
+      favourites.splice(index, 1);
+      localStorage.setItem("favourites", JSON.stringify(favourites));
     } else {
-      props.favouriteArticles.value = [
-        ...props.favouriteArticles.value,
-        props.url,
-      ];
+      favourites.push(props.url);
+      localStorage.setItem("favourites", JSON.stringify(favourites));
     }
     isFavourite();
   };
 
   const isFavourite = () => {
-    let index = props.favouriteArticles.value.indexOf(props.url);
+    let favourites = localStorage.favourites
+      ? JSON.parse(localStorage.favourites)
+      : [];
+    let index = favourites.indexOf(props.url);
     if (index !== -1) {
       fill.value = "yellow";
     } else {
