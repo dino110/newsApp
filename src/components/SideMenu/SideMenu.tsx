@@ -5,6 +5,7 @@ import general from "../../assets/SideMenuIcons/General.svg?inline";
 import health from "../../assets/SideMenuIcons/Health.svg?inline";
 import science from "../../assets/SideMenuIcons/Science.svg?inline";
 import technology from "../../assets/SideMenuIcons/Technology.svg?inline";
+import favourites from "../../assets/SideMenuIcons/Favourites.svg?inline";
 
 type menuCategory = { displayName: string; searchName: string; icon: string };
 
@@ -43,6 +44,11 @@ const categories: menuCategory[] = [
     displayName: "Technology",
     searchName: "technology",
     icon: technology,
+  },
+  {
+    displayName: "Favourites",
+    searchName: "favourites",
+    icon: favourites,
   },
 ];
 
