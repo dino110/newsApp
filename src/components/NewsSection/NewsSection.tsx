@@ -9,12 +9,12 @@ import { signal } from "@preact/signals-react";
 
 const allCategories = [
   "business",
-  "entertainment",
+  //"entertainment",
   "general",
-  "health",
-  "science",
-  "sports",
-  "technology",
+  //  "health",
+  // "science",
+  // "sports",
+  //  "technology",
 ];
 
 export interface Article {
@@ -39,9 +39,11 @@ function NewsSection({
 }) {
   const getAllArticles = async () => {
     let newsArr: Article[] = [];
+    // get news by category, categories listed on line 10
     for (const category of allCategories) {
       const news = await getCategoryNews(category);
       for (const article of news.articles) {
+        //add category property so you can filter it later
         let newArticle = { category: category, ...article };
         newsArr = [...newsArr, newArticle];
       }
@@ -50,7 +52,8 @@ function NewsSection({
   };
 
   useEffect(() => {
-    let allArticles = getAllArticles();
+    let allArticles = getAllArticles(); // get all news
+    // sort news by date
     allArticles.then((allArticles) => {
       allNews.value = allArticles.sort(function (a: Article, b: Article) {
         return (
@@ -67,18 +70,21 @@ function NewsSection({
         <LatestNewsCard allNews={allNews} />
         {allNews.value
           .filter((news) => {
-            if (categorySignal.value != "") {
+            if (categorySignal.value != "favourites") {
               return news.category
                 ?.toLowerCase()
                 .includes(categorySignal.value);
-            } else return news;
+            } else {
+              let favourites = localStorage.favourites
+                ? JSON.parse(localStorage.favourites)
+                : [];
+              for (const url of favourites) {
+                if (news.url == url) return news;
+              }
+            }
           })
           .filter((categoryNews) => {
-            if (searchInput.value != "") {
-              return categoryNews.title
-                .toLowerCase()
-                .includes(searchInput.value);
-            } else return categoryNews;
+            return categoryNews.title.toLowerCase().includes(searchInput.value);
           })
           .map((news, index) => (
             <NewsCard
@@ -87,7 +93,7 @@ function NewsSection({
               url={news.url}
               category={news.category || ""}
               newsAuthor={news.author || "unknown author"}
-              newsTitle={news.title}
+              newsTitle={news.title || ""}
               imgUrl={news.urlToImage || imageNotAvailable}
             />
           ))}
