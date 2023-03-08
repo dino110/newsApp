@@ -44,6 +44,10 @@ $breakpoints: (
   }
 }
 
+@mixin padding {
+  padding: 0 8px;
+}
+
 @mixin flexRow {
   display: flex;
   flex-direction: row;
@@ -69,13 +73,14 @@ $breakpoints: (
 body {
   background: #f2f2f2;
   margin: 0 0;
+  @include padding;
 }
 
 #root {
   max-width: 1095px;
   height: 100%;
   margin: 0 auto;
-  // border: 1px solid black;
+
   //text-align: center;
 }
 
@@ -95,15 +100,14 @@ body {
   background-position: 69%;
 
   @include xs {
-    border: 1px solid red;
   }
 
   @include sm {
-    border: 1px solid blue;
   }
 
   .Container {
     max-width: 1095px;
+    @include padding;
     height: 100%;
     margin: auto;
     @include flexRow;
@@ -158,8 +162,13 @@ body {
 .SearchComponent {
   max-width: 1095px;
   margin: 95px auto 0 auto;
-  @include flexRow;
-  justify-content: start;
+  border: 1px solid blue;
+  @include flexColumn;
+  align-items: flex-start;
+
+  @include md {
+    @include flexRow;
+  }
 
   .MyNews {
     font-family: Inter-Black;
@@ -177,10 +186,17 @@ body {
   }
 
   .SearchInput {
-    margin-left: 43px;
     position: relative;
-    width: 815px;
+    margin-top: 20px;
+    width: 100%;
+
     @include flexRow;
+
+    @include md {
+      margin-left: 43px;
+      margin-top: 0px;
+      width: 815px;
+    }
 
     input {
       width: 100%;
@@ -221,6 +237,11 @@ body {
       font-family: Inter-Bold;
       position: relative;
       left: -95px;
+      display: none;
+
+      @include md {
+        display: block;
+      }
     }
   }
 }
@@ -241,9 +262,12 @@ body {
   @include flexColumn;
   gap: 2px;
   width: 65px;
-  // margin-top: 24px;
-  //border: 1px solid blue;
-  //left: 0;
+
+  display: none;
+
+  @include md {
+    display: block;
+  }
 
   .CategoryBox {
     width: 63px;
@@ -292,7 +316,11 @@ body {
 
 .NewsSection {
   width: 100%;
-  margin-left: 25px;
+  margin-left: 15px;
+
+  @include lg {
+    margin-left: 25px;
+  }
 
   .Title {
     font-family: Inter-SemiBold;
@@ -306,15 +334,26 @@ body {
     width: 100%;
     display: grid;
     grid-auto-flow: row;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(1, minmax(0, 1fr));
     grid-gap: 16px;
     margin-top: 16px;
+
+    @include md {
+      border: 1px solid blue;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include xl {
+      border: 1px solid black;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 }
 
 .NewsCard {
-  width: 321px;
-  height: 252px;
+  max-width: 321px;
+  min-width: 312px;
+  height: 254px;
   background-color: #fff;
   box-shadow: 0px 1px 2px -1px #c8cad1;
   border-radius: 8px;
@@ -381,7 +420,7 @@ body {
         width: 20px;
         height: 20px;
         position: absolute;
-        right: 0px;
+        right: 4px;
         top: 2px;
       }
     }
@@ -389,18 +428,29 @@ body {
 }
 
 .LatestNewsCard {
-  width: 321px;
-  height: 529px;
+  max-width: 321px;
+  min-width: 300px;
+  height: 524px;
   background: #ffffff;
   box-shadow: 0px 1px 2px -1px #c8cad1;
   border-radius: 8px;
   grid-row: span 2 / span 2;
-  order: 2;
+  // order: 1;
+  display: none;
   box-sizing: border-box;
   padding: 19px 3px 0 0px;
   position: relative;
   //margin-left: 100%;
   //right: 200px;
+
+  @include md {
+    display: block;
+    order: 1;
+  }
+
+  @include xl {
+    order: 2;
+  }
 
   .TitleSection {
     @include flexRow;
